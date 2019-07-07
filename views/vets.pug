@@ -1,0 +1,13 @@
+extends layout
+
+include mixins/_vetCard
+
+block content
+    h2 #{title}
+
+    .row
+        each vet in vets
+            .col-6.col-md-4.bg-light.border
+                +vetCard(vet)
+
+

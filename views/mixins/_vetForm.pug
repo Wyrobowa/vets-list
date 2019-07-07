@@ -1,0 +1,42 @@
+mixin vetForm(vet = {}, tags = {}, formAction)
+    form(action=formAction method="POST" class="edit")
+        .form-group
+            label(for="name") Name
+            input(type="text" name="name" value=vet.name class="form-control" placeholder="Name")
+        .form-group
+            p Rate
+            .form-check.form-check-inline
+                input.form-check-input(type="radio" name="rate" id="rate_1" value="1")
+                label.form-check-label(for="rate_1") 1
+            .form-check.form-check-inline
+                input.form-check-input(type="radio" name="rate" id="rate_2" value="2")
+                label.form-check-label(for="rate_2") 2
+            .form-check.form-check-inline
+                input.form-check-input(type="radio" name="rate" id="rate_3" value="3")
+                label.form-check-label(for="rate_3") 3
+            .form-check.form-check-inline
+                input.form-check-input(type="radio" name="rate" id="rate_4" value="4")
+                label.form-check-label(for="rate_4") 4
+            .form-check.form-check-inline
+                input.form-check-input(type="radio" name="rate" id="rate_5" value="5")
+                label.form-check-label(for="rate_5") 5
+        .form-group
+            label(for="description") Description
+            textarea(type="text" name="description" class="form-control" placeholder="Description")= vet.description
+        .form-group
+            label(for="address") Address
+            input(type="text" id="address" name="location[address]" value=(vet.location && vet.location.address) placeholder="Full address" class="form-control")
+        .form-group
+            label(for="lng") Address Lng
+            input(type="text" id="lng" name="location[coordinates][0]" value=(vet.location && vet.location.coordinates[0]) class="form-control" placeholder="Longitude" required)
+            label(for="lng") Address Lat
+            input(type="text" id="lat" name="location[coordinates][1]" value=(vet.location && vet.location.coordinates[1]) class="form-control" placeholder="Latitude" required)
+        - const vetTags = vet.tags.join(',').split(',') || []
+        .tags
+            p Tags
+            each tag in tags
+                .form-group.form-check.form-check-inline
+                    input(type="checkbox" id=tag._id value=tag._id name="tags" class="form-check-input" checked=(vetTags.includes(tag._id.toString())))
+                    label(for=tag._id class="form-check-label") #{tag.name}
+        input(type="submit" value=title class="btn btn-primary")
+        

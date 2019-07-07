@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    .form-group
+        a(href=`/vet/${vet.slug}/edit` class="btn btn-info") Edit
+    .form-group
+        h2 #{vet.name}
+    .form-group
+        span.rate Rate: #{vet.rate}
+    .form-group
+        span Description: #{vet.description}
+    .form-group
+        span Tags: 
+        each tag in tags
+            span.badge.badge-pill.badge-secondary.mr-1= tag.name
+    .form-group
+        span Address: 
+        span.single__location= vet.location.address
+    .form-group
+        img.single__map.img-fluid(src=h.staticMap(vet.location.coordinates))

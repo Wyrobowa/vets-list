@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h2 #{title}
+
+    a(href=`/tags/add` class="btn btn-info") Add new tag
+
+    ul.list-group.mt-2
+        each tag in tags
+            li.list-group-item=tag.name
+                span.fas.fa-trash.float-right(style="color:red")

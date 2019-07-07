@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+  body
+    block header
+      header
+        ul.nav
+          each item in h.menu
+            li.nav-item
+              a.nav-link.btn.btn-light(href=item.slug)
+                i.fas(class=item.icon)
+                span  #{item.title}
+
+    .container
+      block content
+
+    block scripts
+      script(src='https://kit.fontawesome.com/8f9b11067f.js')
+      script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+      

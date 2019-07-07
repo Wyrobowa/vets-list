@@ -1,0 +1,4 @@
+mixin vetCard(vet = {})
+    a.font-weight-bold(href=`/vet/${vet.slug}`) #{vet.name}
+    p.text-truncate #{vet.description};
+    p #{vet.rate}
