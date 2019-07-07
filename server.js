@@ -28,14 +28,14 @@ dotenv.config();
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
-    console.log(`DB Error! -  ${err}`);
+  console.log(`DB Error! -  ${err}`);
 });
 
 app.use(morgan('dev'));
 
 app.use((req, res, next) => {
-    res.locals.h = helpers;
-    next();
+  res.locals.h = helpers;
+  next();
 });
 
 // routes
@@ -46,5 +46,5 @@ app.set('port', process.env.PORT || 9000);
 
 // server start
 const server = app.listen(app.get('port'), () => {
-    console.log(`Express running on port ${server.address().port}`);
+  console.log(`Express running on port ${server.address().port}`);
 });

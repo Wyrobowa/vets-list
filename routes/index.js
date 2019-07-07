@@ -1,7 +1,16 @@
 const express = require('express');
 
 const router = express.Router();
-const { homePage, getVets, getVetBySlug, addVet, createVet, editVet, updateVet, getTop } = require('../controllers/vetsController');
+const {
+  homePage,
+  getVets,
+  getVetBySlug,
+  addVet,
+  createVet,
+  editVet,
+  updateVet,
+  getTop,
+} = require('../controllers/vetsController');
 const { getTags, addTag, createTag } = require('../controllers/tagsController');
 
 router.get('/', homePage);

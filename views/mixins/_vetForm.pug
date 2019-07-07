@@ -31,12 +31,13 @@ mixin vetForm(vet = {}, tags = {}, formAction)
             input(type="text" id="lng" name="location[coordinates][0]" value=(vet.location && vet.location.coordinates[0]) class="form-control" placeholder="Longitude" required)
             label(for="lng") Address Lat
             input(type="text" id="lat" name="location[coordinates][1]" value=(vet.location && vet.location.coordinates[1]) class="form-control" placeholder="Latitude" required)
-        - const vetTags = vet.tags.join(',').split(',') || []
+        - const vetTags = vet.tags || []
+        - const parsedVetTags = vetTags.join(',').split(',')
         .tags
             p Tags
             each tag in tags
                 .form-group.form-check.form-check-inline
-                    input(type="checkbox" id=tag._id value=tag._id name="tags" class="form-check-input" checked=(vetTags.includes(tag._id.toString())))
+                    input(type="checkbox" id=tag._id value=tag._id name="tags" class="form-check-input" checked=(parsedVetTags.includes(tag._id.toString())))
                     label(for=tag._id class="form-check-label") #{tag.name}
         input(type="submit" value=title class="btn btn-primary")
         
