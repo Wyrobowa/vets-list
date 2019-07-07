@@ -2,14 +2,15 @@ header #logo {
   height: 50px;
 }
 
+header .nav-item {
+  margin: 0 10px;
+}
+
 .container {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-a {
-  color: #343a40;
-}
-
-a:hover {
-  color: #6c757d;
+.card .card-text {
+  font-size: 0.8rem;
 }
