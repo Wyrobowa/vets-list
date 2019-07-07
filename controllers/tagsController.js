@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Tag = mongoose.model('Tag');
+const Vet = mongoose.model('Vet');
 
 const getTags = async (req, res) => {
   const tagsList = await Tag.find();
@@ -16,4 +17,15 @@ const createTag = async (req, res) => {
   res.redirect('/tags');
 };
 
-module.exports = { getTags, addTag, createTag };
+const removeTag = async (req, res) => {
+  await Tag.findByIdAndDelete(req.body.tagId);
+  await Vet.find({ tags: req.body.tagId });
+  res.send({ status: 'successful' });
+};
+
+module.exports = {
+  getTags,
+  addTag,
+  createTag,
+  removeTag,
+};

@@ -1,0 +1,15 @@
+header #logo {
+  height: 50px;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+a {
+  color: #343a40;
+}
+
+a:hover {
+  color: #6c757d;
+}

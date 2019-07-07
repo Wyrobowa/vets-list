@@ -7,5 +7,5 @@ block content
 
     ul.list-group.mt-2
         each tag in tags
-            li.list-group-item=tag.name
-                span.fas.fa-trash.float-right(style="color:red")
+            li.list-group-item(id=tag._id)= tag.name
+                span.js-removeTag.fas.fa-trash.float-right(style="color:red" data-id=tag._id)

@@ -3,6 +3,7 @@ mixin vetForm(vet = {}, tags = {}, formAction)
         .form-group
             label(for="name") Name
             input(type="text" name="name" value=vet.name class="form-control" placeholder="Name")
+        - if (formAction !== '/add') {
         .form-group
             p Rate
             .form-check.form-check-inline
@@ -20,6 +21,7 @@ mixin vetForm(vet = {}, tags = {}, formAction)
             .form-check.form-check-inline
                 input.form-check-input(type="radio" name="rate" id="rate_5" value="5")
                 label.form-check-label(for="rate_5") 5
+        - }
         .form-group
             label(for="description") Description
             textarea(type="text" name="description" class="form-control" placeholder="Description")= vet.description

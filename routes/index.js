@@ -11,7 +11,12 @@ const {
   updateVet,
   getTop,
 } = require('../controllers/vetsController');
-const { getTags, addTag, createTag } = require('../controllers/tagsController');
+const {
+  getTags,
+  addTag,
+  createTag,
+  removeTag,
+} = require('../controllers/tagsController');
 
 router.get('/', homePage);
 router.get('/vets', getVets);
@@ -23,6 +28,7 @@ router.post('/add', createVet);
 router.get('/tags', getTags);
 router.get('/tags/add', addTag);
 router.post('/tags/add', createTag);
+router.post('/tags/remove', removeTag);
 router.get('/top', getTop);
 
 module.exports = router;
