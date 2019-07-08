@@ -6,6 +6,8 @@ const {
   getVets,
   getVetBySlug,
   addVet,
+  upload,
+  resize,
   createVet,
   editVet,
   updateVet,
@@ -28,9 +30,9 @@ router.get('/', homePage);
 router.get('/vets', getVets);
 router.get('/vet/:slug', getVetBySlug);
 router.get('/vet/:slug/edit', editVet);
-router.post('/vet/:slug/edit', updateVet);
+router.post('/vet/:slug/edit', upload, resize, updateVet);
 router.get('/add', addVet);
-router.post('/add', createVet);
+router.post('/add', upload, resize, createVet);
 router.get('/tags', getTags);
 router.get('/tags/add', addTag);
 router.post('/tags/add', createTag);

@@ -1,5 +1,5 @@
 mixin vetForm(vet = {}, tags = {}, formAction)
-    form.edit(action=formAction method="POST")
+    form.edit(action=formAction method="POST" enctype="multipart/form-data")
         .form-group
             label(for="name") Name
             input(type="text" name="name" value=vet.name class="form-control" placeholder="Name")
@@ -41,5 +41,10 @@ mixin vetForm(vet = {}, tags = {}, formAction)
                 .form-group.form-check.form-check-inline
                     input(type="checkbox" id=tag._id value=tag._id name="tags" class="form-check-input" checked=(parsedVetTags.includes(tag._id.toString())))
                     label(for=tag._id class="form-check-label") #{tag.name}
+        .form-group
+            label(for="vet_logo") Logo
+            input(type="file" class="form-control-file" id="vet_logo" name="vet_logo")
+            if vet.vet_logo 
+                img(src=`/public/uploads/${vet.vet_logo}` alt=vet.name width=200)
         input.btn.btn-success(type="submit" value=title)
         

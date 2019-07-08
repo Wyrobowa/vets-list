@@ -2,7 +2,10 @@ extends layout
 
 block content
     .form-group
-        a.btn.btn-primary(href=`/vet/${vet.slug}/edit`) Edit 
+        a.btn.btn-primary(href=`/vet/${vet.slug}/edit`) Edit
+    - const logoUrl = (vet.vet_logo) ? vet.vet_logo : './logo.jpeg'
+    - console.log(logoUrl);
+    img.float-right.ml-3(src=`/public/uploads/${logoUrl}` alt=vet.name width=300)
     .form-group
         h2 #{vet.name}
     .form-group

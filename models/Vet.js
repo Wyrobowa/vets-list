@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
 const slug = require('slugs');
 
@@ -28,13 +29,14 @@ const vetSchema = new mongoose.Schema({
       type: String,
     },
   },
+  vet_logo: String,
   created: {
     type: Date,
     default: Date.now,
   },
 });
 
-vetSchema.pre('save', async (next) => {
+vetSchema.pre('save', async function (next) {
   if (!this.isModified('name')) return next();
   this.slug = slug(this.name);
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');

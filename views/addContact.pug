@@ -15,10 +15,10 @@ block content
             input.form-control(type="number" name="phone")
         .form-group
             label(for="address") Address
-            input(type="text" id="address" name="location[address]" placeholder="Full address" class="form-control")
+            input(type="text" id="addressContact" name="location[address]" placeholder="Full address" class="form-control")
         .form-group
             label(for="lng") Address Lng
-            input(type="text" id="lng" name="location[coordinates][0]" class="form-control" placeholder="Longitude" required)
+            input(type="text" id="lngContact" name="location[coordinates][0]" class="form-control" placeholder="Longitude" required)
             label(for="lng") Address Lat
-            input(type="text" id="lat" name="location[coordinates][1]" class="form-control" placeholder="Latitude" required)
+            input(type="text" id="latContact" name="location[coordinates][1]" class="form-control" placeholder="Latitude" required)
         input.btn.btn-success(type="submit" value=title)
