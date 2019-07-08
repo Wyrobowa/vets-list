@@ -28,7 +28,7 @@ mixin vetForm(vet = {}, tags = {}, formAction)
         .form-group
             label(for="address") Address
             input(type="text" id="address" name="location[address]" value=(vet.location && vet.location.address) placeholder="Full address" class="form-control")
-        .form-group
+        .form-group.d-none
             label(for="lng") Address Lng
             input(type="text" id="lng" name="location[coordinates][0]" value=(vet.location && vet.location.coordinates[0]) class="form-control" placeholder="Longitude" required)
             label(for="lng") Address Lat
