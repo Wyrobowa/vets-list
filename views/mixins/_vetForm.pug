@@ -41,5 +41,5 @@ mixin vetForm(vet = {}, tags = {}, formAction)
                 .form-group.form-check.form-check-inline
                     input(type="checkbox" id=tag._id value=tag._id name="tags" class="form-check-input" checked=(parsedVetTags.includes(tag._id.toString())))
                     label(for=tag._id class="form-check-label") #{tag.name}
-        input(type="submit" value=title class="btn btn-primary")
+        input.btn.btn-success(type="submit" value=title)
         

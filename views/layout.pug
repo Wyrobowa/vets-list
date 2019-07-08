@@ -4,6 +4,7 @@ html
     title= title
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
     link(rel="stylesheet", href="/public/css/main.css")
+    link(rel="stylesheet", href="/public/assets/font_awesome/css/all.css")
   body
     block header
       header
@@ -24,7 +25,6 @@ html
         span Vets List 2019
 
     block scripts
-      script(src='https://kit.fontawesome.com/8f9b11067f.js')
       script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
       script(src="/public/js/index.js")
       

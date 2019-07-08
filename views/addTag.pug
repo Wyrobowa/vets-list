@@ -1,10 +1,10 @@
 extends layout
 
 block content
-    h2 #{title}
+    h2.title #{title}
 
-    form(action='/tags/add' method="POST" class="edit")
+    form.edit(action='/tags/add' method="POST")
         .form-group
             label(for="name") Name
-            input(type="text" name="name" class="form-control")
-        input(type="submit" value=title class="btn btn-primary")
+            input.form-control(type="text" name="name")
+        input.btn.btn-success(type="submit" value=title)

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  //- a.btn.btn-success(href=`/contact/add`) Add contact
+  .row.mt-5
+    .col-6.contact-address
+      .center
+        h1.mb-5 #{contact.name}
+        p
+          i.fas.fa-at
+          a.text-decoration-none(href=`mailto:${contact.email}`)  #{contact.email}
+        p 
+          i.fas.fa-phone-alt
+          span  #{contact.phone}
+        p 
+          i.fas.fa-map-marker-alt
+          span  #{contact.location.address}
+    .col-6
+      img#contactLogo(src="/public/img/logo/logo.jpeg" alt="Veterinarians List")

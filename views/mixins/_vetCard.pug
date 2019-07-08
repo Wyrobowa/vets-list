@@ -1,5 +1,9 @@
 mixin vetCard(vet = {})
-    .card-body
-        a.card-title(href=`/vet/${vet.slug}`) #{vet.name}
-        p.card-text #{vet.description};
-        p #{vet.rate}
+    - const logoUrl = vet.logo || '/public/img/logo/logo.jpeg'
+    a.list-group-item-action(href=`/vet/${vet.slug}`)
+        img.card-img-top(src=logoUrl alt=vet.name)
+        .card-body.bg-light
+            h5.card-title #{vet.name}
+            p.card-text #{vet.description};
+            p #{vet.rate}
+            

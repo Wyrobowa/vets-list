@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 // models
 require('./models/Vet');
 require('./models/Tag');
+require('./models/Contact');
 
 const helpers = require('./helpers');
 const routes = require('./routes/index');

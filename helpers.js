@@ -6,8 +6,8 @@ const menu = [
   { slug: '/vets', title: 'List of Vets', icon: 'fa-paw' },
   { slug: '/tags', title: 'Tags', icon: 'fa-tags' },
   { slug: '/top', title: 'Top Vets', icon: 'fa-thumbs-up' },
-  { slug: '/map', title: 'Map', icon: 'fa-map' },
   { slug: '/add', title: 'Add Vet', icon: 'fa-plus-square' },
+  { slug: '/contact', title: 'Contact', icon: 'fa-phone' },
 ];
 
 module.exports = { menu, staticMap };
