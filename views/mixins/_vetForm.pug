@@ -1,5 +1,5 @@
 mixin vetForm(vet = {}, tags = {}, formAction)
-    form(action=formAction method="POST" class="edit")
+    form.edit(action=formAction method="POST")
         .form-group
             label(for="name") Name
             input(type="text" name="name" value=vet.name class="form-control" placeholder="Name")

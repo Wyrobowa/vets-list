@@ -1,8 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
+const { homePage } = require('../controllers/indexController');
 const {
-  homePage,
   getVets,
   getVetBySlug,
   addVet,
@@ -10,6 +10,7 @@ const {
   editVet,
   updateVet,
   getTop,
+  searchVets,
 } = require('../controllers/vetsController');
 const {
   getTags,
@@ -38,5 +39,6 @@ router.get('/top', getTop);
 router.get('/contact', getContact);
 router.get('/contact/add', addContact);
 router.post('/contact/add', createContact);
+router.post('/search', searchVets);
 
 module.exports = router;

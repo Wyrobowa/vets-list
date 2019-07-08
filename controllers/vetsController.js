@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const Vet = mongoose.model('Vet');
 const Tag = mongoose.model('Tag');
 
-const homePage = (req, res) => {
-  res.render('index', { title: 'Hello on our page!' });
-};
-
 const getVets = async (req, res) => {
   const vetsList = await Vet.find();
   res.render('vets', { vets: vetsList });
@@ -50,6 +46,11 @@ const getTop = async (req, res) => {
   res.render('vets', { vets: vetsList });
 };
 
+const searchVets = async (req, res) => {
+  const vetsList = await Vet.find({ name: { $regex: req.body.search, $options: 'i' } });
+  res.render('vets', { title: `Results for "${req.body.search}"`, vets: vetsList });
+};
+
 module.exports = {
-  homePage, getVets, getVetBySlug, addVet, createVet, editVet, updateVet, getTop,
+  getVets, getVetBySlug, addVet, createVet, editVet, updateVet, getTop, searchVets,
 };
