@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h2.title #{title}
+
+    form.edit(action='/tags/add' method="POST")
+        .form-group
+            label(for="name") Name
+            input.form-control(type="text" name="name")
+        input.btn.btn-success(type="submit" value=title)

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  p Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores odio, mollitia possimus voluptatem nemo, nostrum ducimus repellendus non omnis dolor molestias doloremque ex! Sequi a tempore fugiat aliquid assumenda repudiandae.
+  p Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum illo quisquam inventore aut! Impedit illum blanditiis autem obcaecati dolorem modi inventore natus minima! Minima eius qui illum laudantium perferendis eligendi?
+
+  .row
+    .col-sm-12
+      form.form-inline(action="/search" method="POST" )
+        input.form-control.form-control-lg.col-sm-10(type="search" name="search" placeholder="Find vet by name or specialization")
+        button.btn.btn-lg.btn-outline-success.col-sm-2(type="submit") Search

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h2.title #{title}
+    a.btn.btn-success(href=`/tags/add`) Add tag
+    ul.list-group.mt-2
+        each tag in tags
+            li.list-group-item(id=tag._id)= tag.name
+                span.js-removeTag.fas.fa-trash.float-right(style="color:red" data-id=tag._id)
