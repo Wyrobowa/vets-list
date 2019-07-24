@@ -51,6 +51,8 @@ mixin vetForm(vet = {}, tags = {}, formAction)
             input(type="file" class="form-control-file" id="vet_gallery" name="vet_gallery" multiple)
             if vet.vet_gallery
                 each image in vet.vet_gallery
-                    img(src=`/public/uploads/vets_galleries/${vet.slug}/${image}` alt=vet.name width=200)
+                    .gallery-small(id=image)
+                        img.image-small(src=`/public/uploads/vets_galleries/${vet.slug}/${image}` alt=vet.name width=200)
+                        span.js-removeGalleryImage.trash-small.trash-icon.fas.fa-trash(data-id=image)
         input.btn.btn-success(type="submit" value=title)
         

@@ -68,15 +68,21 @@ function resize(vetImages, path) {
 
 const saveAndResizeImages = async (req, res, next) => {
   if (!req.files) return next();
+  req.vet_gallery = {};
   if (req.files.vet_logo) {
     req.body.vet_logo = await save(req.files.vet_logo);
     resize(req.files.vet_logo, `./public/uploads/vets_logos/${req.params.slug}/`);
   }
   if (req.files.vet_gallery) {
-    req.body.vet_gallery = await save(req.files.vet_gallery);
+    req.vetGallery = await save(req.files.vet_gallery);
     resize(req.files.vet_gallery, `./public/uploads/vets_galleries/${req.params.slug}/`);
   }
   next();
+};
+
+const removeImage = async (req, res) => {
+  await Vet.findOneAndUpdate({ vet_gallery: req.body.imageName }, { $pull: { vet_gallery: req.body.imageName } });
+  res.send({ status: 'successful' });
 };
 
 const createVet = async (req, res) => {
@@ -94,7 +100,7 @@ const editVet = async (req, res, next) => {
 };
 
 const updateVet = async (req, res) => {
-  const vet = await Vet.findOneAndUpdate({ slug: req.params.slug }, req.body);
+  const vet = await Vet.findOneAndUpdate({ slug: req.params.slug }, { $push: { vet_gallery: req.vetGallery }, ...req.body });
   res.redirect(`/vet/${vet.slug}`);
 };
 
@@ -109,5 +115,5 @@ const searchVets = async (req, res) => {
 };
 
 module.exports = {
-  getVets, getVetBySlug, addVet, uploadImages, saveAndResizeImages, createVet, editVet, updateVet, getTop, searchVets,
+  getVets, getVetBySlug, addVet, uploadImages, saveAndResizeImages, removeImage, createVet, editVet, updateVet, getTop, searchVets,
 };

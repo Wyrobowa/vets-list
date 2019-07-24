@@ -117,3 +117,22 @@
 }
 
 /** Gallery in form */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gallery-small {
+  max-width: 10em;
+  max-height: 10em;
+  margin: 1em 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.trash-small {
+  position: absolute;
+  top: 0.3em;
+  right: 0.3em;
+}

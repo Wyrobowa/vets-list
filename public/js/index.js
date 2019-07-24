@@ -1,5 +1,7 @@
 /* eslint-disable */
 (function () {
+  // Tags - removing tags
+
   const tagsList = document.querySelectorAll('.js-removeTag');
   const removeTag = (id) => {
     const nodeElement = document.getElementById(id);
@@ -42,40 +44,79 @@
   
   googleMaps();
 
-  // Gallery
+  // Gallery - slider
 
   let slideIndex = 1;
   showSlides(slideIndex);
 
   const prev = document.querySelector('.prev');
-  prev.addEventListener('click', function (event) {
-    showSlides(slideIndex += -1);
-  });
-  const next = document.querySelector('.next');
-  next.addEventListener('click', function (event) {
-    showSlides(slideIndex += 1);
-  });
-  const dots = document.querySelectorAll('.dot');
-  dots.forEach(dot => {
-    dot.addEventListener('click', function (event) {
-      const slideNumber = event.target.getAttribute('data-slide');
-      showSlides(slideIndex = slideNumber);
+  if (prev) {
+    prev.addEventListener('click', function (event) {
+      showSlides(slideIndex += -1);
     });
-  });
+  }
+  const next = document.querySelector('.next');
+  if (next) {
+    next.addEventListener('click', function (event) {
+      showSlides(slideIndex += 1);
+    });
+  }
+  const dots = document.querySelectorAll('.dot');
+  if (dots) {
+    dots.forEach(dot => {
+      dot.addEventListener('click', function (event) {
+        const slideNumber = event.target.getAttribute('data-slide');
+        showSlides(slideIndex = slideNumber);
+      });
+    });
+  }
 
   function showSlides(n) {
     let i;
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
-    if (n > slides.length) slideIndex = 1;
-    if (n < 1) slideIndex = slides.length;
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none';
+
+    if (slides.length > 0) {
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+      }
+      slides[slideIndex-1].style.display = 'block'; 
     }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(' active', '');
+
+    if (dots.length > 0) {
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(' active', '');
+      }
+      dots[slideIndex-1].className += ' active';
     }
-    slides[slideIndex-1].style.display = 'block'; 
-    dots[slideIndex-1].className += ' active';
   }
+
+  // Gallery - removing images
+
+  const gallery = document.querySelectorAll('.js-removeGalleryImage');
+  const removeImage = (id) => {
+    const nodeElement = document.getElementById(id);
+    if (nodeElement) {
+      nodeElement.remove();
+    }
+  };
+
+  gallery.forEach(function(item) {
+    item.addEventListener('click', function (event) {
+      const imageName = event.target.getAttribute('data-id');
+
+      fetch('/vet/:slug/edit/remove', {
+        method: 'POST',
+        body: JSON.stringify({imageName: imageName}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => {
+        removeImage(imageName);
+        return response.json;
+      });
+    });
+  });
 } ());

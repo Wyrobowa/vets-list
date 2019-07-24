@@ -47,6 +47,11 @@ header .nav-item {
   width: 100%;
 }
 
+.trash-icon {
+  color: rgb(255, 100, 100);
+  cursor: pointer;
+}
+
 footer {
   height: 3rem;
 }

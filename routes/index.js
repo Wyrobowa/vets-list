@@ -8,6 +8,7 @@ const {
   addVet,
   uploadImages,
   saveAndResizeImages,
+  removeImage,
   createVet,
   editVet,
   updateVet,
@@ -31,6 +32,7 @@ router.get('/vets', getVets);
 router.get('/vet/:slug', getVetBySlug);
 router.get('/vet/:slug/edit', editVet);
 router.post('/vet/:slug/edit', uploadImages, saveAndResizeImages, updateVet);
+router.post('/vet/:slug/edit/remove', removeImage);
 router.get('/add', addVet);
 router.post('/add', uploadImages, saveAndResizeImages, createVet);
 router.get('/tags', getTags);
