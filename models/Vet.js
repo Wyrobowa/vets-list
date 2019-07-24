@@ -30,6 +30,7 @@ const vetSchema = new mongoose.Schema({
     },
   },
   vet_logo: String,
+  vet_gallery: [String],
   created: {
     type: Date,
     default: Date.now,

@@ -4,13 +4,15 @@ html
     title= title
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
     link(rel="stylesheet", href="/public/css/main.css")
+    link(rel="stylesheet", href="/public/css/gallery.css")
     link(rel="stylesheet", href="/public/assets/font_awesome/css/all.css")
+
   body
     block header
       header
         nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           a(href='/')
-            img#logo(src="/public/img/logo/logo.jpeg" alt="Veterinarians List")
+            img#logo(src="/public/uploads/logo.jpeg" alt="Veterinarians List")
           ul.navbar-nav
             each item in h.menu
               li.nav-item
