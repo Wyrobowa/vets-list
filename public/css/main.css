@@ -6,9 +6,28 @@ header .nav-item {
   margin: 0 10px;
 }
 
+header .auth-buttons {
+  position: absolute;
+  right: 1em;
+}
+
 .container {
   margin-top: 2rem;
   min-height: calc(100vh - 9.6rem);
+}
+
+.flash {
+  border: solid 1px red;
+  padding: 0.5em;
+  font-size: 0.8em;
+  font-weight: lighter;
+  margin: 1em 0;
+}
+
+.form-box {
+  padding: 1.5rem;
+  border: solid #f8f9fa;
+  border-width: .2rem;
 }
 
 .small-title {

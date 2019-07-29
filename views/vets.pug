@@ -4,7 +4,8 @@ include mixins/_vetCard
 
 block content
     h2.title #{title}
-
+    if (user)
+        a.btn.btn-success(href=`/vets/add`) Add vet
     .row
         each vet in vets
             .col-6.col-md-4

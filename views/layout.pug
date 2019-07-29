@@ -19,6 +19,27 @@ html
                 a.nav-link(href=item.slug)
                   i.fas(class=item.icon)
                   span  #{item.title}
+          .auth-buttons
+            if (user)
+              .profile
+                a(href='/profile') Profile
+              .logout
+                a(href='/logout') Logout
+            else
+              .login
+                a(href='/login') Login
+              .register
+                a(href='/register') Register
+
+    block messages
+      if locals.flashes
+        .flash-messages
+          - const categories = Object.keys(locals.flashes)
+          each category in categories
+            each message in flashes[category]
+              .flash(class=`flash--${category}`)
+                p.flash__text!= message
+                button.flash__remove(onClick="this.parentElement.remove()") &times;
 
     .container
       block content

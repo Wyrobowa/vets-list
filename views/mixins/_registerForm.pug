@@ -1,0 +1,15 @@
+mixin registerForm()
+  form.form(action="/register" method="POST")
+    h2 Register
+    .form-group
+      input.form-control(type="text" name="first_name" placeholder="First Name")
+    .form-group
+      input.form-control(type="text" name="last_name" placeholder="Last Name")
+    .form-group
+      input.form-control(type="email" name="email" placeholder="Email")
+    .form-group
+      input.form-control(type="password" name="password" placeholder="Password")
+    .form-group
+      input.form-control(type="password" name="password_confirmation" placeholder="Password confirmation")
+    button.btn.btn-primary(type="submit")= 'Register'
+    
