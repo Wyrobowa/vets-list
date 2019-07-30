@@ -22,7 +22,7 @@ html
           .auth-buttons
             if (user)
               .profile
-                a(href='/profile') Profile
+                a(href='/account')= `${user.first_name} ${user.last_name}`
               .logout
                 a(href='/logout') Logout
             else

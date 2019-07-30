@@ -1,8 +1,11 @@
 extends layout
 
 include mixins/_loginForm
+include mixins/_forgotPasswordForm
 
 block content
-    h2.title #{title}
     .form-box
         +loginForm()
+
+    .form-box
+        +forgotPasswordForm()

@@ -12,6 +12,9 @@ const promisify = require('es6-promisify');
 const flash = require('connect-flash');
 const MongoVet = require('connect-mongo')(session);
 
+// configs
+dotenv.config();
+
 // models
 require('./models/Vet');
 require('./models/Tag');
@@ -25,9 +28,6 @@ const routes = require('./routes/index');
 require('./handlers/passport');
 
 const app = express();
-
-// configs
-dotenv.config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,0 +1,9 @@
+mixin userForm(user = {})
+  form.form(action="/account/edit" method="POST")
+    .form-group
+      input.form-control(type="text" name="first_name" value=user.first_name placeholder="First Name")
+    .form-group
+      input.form-control(type="text" name="last_name" value=user.last_name placeholder="Last Name")
+    .form-group
+      input.form-control(type="email" name="email" value=user.email placeholder="Email")
+    button.btn.btn-primary(type="submit")= 'Edit User'

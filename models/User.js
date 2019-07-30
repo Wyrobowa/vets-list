@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const md5 = require('md5');
 const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -25,6 +24,8 @@ const userSchema = new mongoose.Schema({
     required: 'Please supply a last name!',
     trim: true,
   },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });

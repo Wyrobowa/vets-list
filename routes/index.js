@@ -8,12 +8,18 @@ const {
   login,
   logout,
   isLoggedIn,
+  forgotPassword,
+  resetPassword,
+  confirmedPassword,
+  updatePassword,
 } = require('../controllers/authController');
 const {
   loginForm,
   registerForm,
   validateRegister,
   register,
+  account,
+  updateAccount,
 } = require('../controllers/userController');
 const {
   getVets,
@@ -36,8 +42,8 @@ const {
 } = require('../controllers/tagsController');
 const {
   getContact,
-  addContact,
-  createContact,
+  editContact,
+  updateContact,
 } = require('../controllers/contactController');
 
 router.get('/', homePage);
@@ -54,13 +60,18 @@ router.post('/tags/add', createTag);
 router.post('/tags/remove', removeTag);
 router.get('/top', getTop);
 router.get('/contact', getContact);
-router.get('/contact/add', isLoggedIn, addContact);
-router.post('/contact/add', createContact);
+router.get('/contact/edit', isLoggedIn, editContact);
+router.post('/contact/edit', updateContact);
 router.post('/search', searchVets);
 router.get('/login', loginForm);
 router.post('/login', login);
 router.get('/logout', logout);
 router.get('/register', registerForm);
 router.post('/register', validateRegister, register, login);
+router.get('/account', isLoggedIn, account);
+router.post('/account/edit', updateAccount);
+router.post('/account/forgot', forgotPassword);
+router.get('/account/reset/:token', resetPassword);
+router.post('/account/reset/:token', confirmedPassword, updatePassword);
 
 module.exports = router;

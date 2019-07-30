@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    h2.title #{title}
+
+    form.edit(action='/contact/edit' method="POST")
+        .form-group
+            label(for="name") Name
+            input.form-control(type="text" name="name" value=contact.name)
+        .form-group
+            label(for="email") Email
+            input.form-control(type="text" name="email" value=contact.email)
+        .form-group
+            label(for="phone") Phone
+            input.form-control(type="number" name="phone" value=contact.phone)
+        .form-group
+            label(for="address") Address
+            input(type="text" id="addressContact" name="location[address]" placeholder="Full address" 
+            class="form-control"  value=(contact.location && contact.location.address))
+        .form-group
+            label(for="lng") Address Lng
+            input(type="text" id="lngContact" name="location[coordinates][0]" class="form-control" 
+            placeholder="Longitude" required value=(contact.location && contact.location.coordinates[0]))
+            label(for="lng") Address Lat
+            input(type="text" id="latContact" name="location[coordinates][1]" class="form-control" 
+            placeholder="Latitude" required value=(contact.location && contact.location.coordinates[1]))
+        input.btn.btn-success(type="submit" value=title)

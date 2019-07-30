@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const promisify = require('es6-promisify');
 
@@ -47,6 +48,29 @@ const register = async (req, res, next) => {
   next();
 };
 
+const account = async (req, res) => {
+  res.render('user', { title: 'Edit Profile' });
+};
+
+const updateAccount = async (req, res, next) => {
+  const updates = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+  };
+
+  const user = await User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $set: updates },
+    { new: true, runvalidators: true, context: 'query' },
+  );
+
+  if (!user) next();
+
+  req.flash('success', 'You have updated you account info!');
+  res.redirect('back');
+};
+
 module.exports = {
-  loginForm, registerForm, validateRegister, register,
+  loginForm, registerForm, validateRegister, register, account, updateAccount,
 };
