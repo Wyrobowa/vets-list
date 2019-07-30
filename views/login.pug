@@ -1,0 +1,11 @@
+extends layout
+
+include mixins/_loginForm
+include mixins/_forgotPasswordForm
+
+block content
+    .form-box
+        +loginForm()
+
+    .form-box
+        +forgotPasswordForm()

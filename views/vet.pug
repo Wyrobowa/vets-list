@@ -4,20 +4,38 @@ block content
     .form-group
         a.btn.btn-primary(href=`/vet/${vet.slug}/edit`) Edit
     - const logoUrl = (vet.vet_logo) ? vet.vet_logo : './logo.jpeg'
-    - console.log(logoUrl);
-    img.float-right.ml-3(src=`/public/uploads/${logoUrl}` alt=vet.name width=300)
+    img.float-right.ml-3(src=`/public/uploads/vets_logos/${vet.slug}/${logoUrl}` alt=vet.name width=300)
     .form-group
         h2 #{vet.name}
     .form-group
         span.rate Rate: #{vet.rate}
     .form-group
-        span Description: #{vet.description}
+        span.font-weight-light #{vet.description}
     .form-group
-        span Tags: 
         each tag in tags
             span.badge.badge-pill.badge-secondary.mr-1= tag.name
+    h4.small-title Address
     .form-group
-        span Address: 
-        span.single__location= vet.location.address
+        span.single__location.font-weight-bold= vet.location.address
     .form-group
         img.single__map.img-fluid(src=h.staticMap(vet.location.coordinates))
+    - const numberOfImages = (vet.vet_gallery).length || 0
+    - let i = 1
+    - let j = 1
+    - if (numberOfImages > 0) {
+    h4.small-title Gallery
+    .form-group.slideshow-container
+        each image in vet.vet_gallery
+            .slide
+                .number= `${i} / ${numberOfImages}`
+                img(src=`/public/uploads/vets_galleries/${vet.slug}/${image}` alt=vet.name)
+                - i++
+        a.prev
+            i.fas.fa-chevron-left
+        a.next
+            i.fas.fa-chevron-right
+        div.dots
+            each image in vet.vet_gallery
+                span.dot(data-slide=`${j}`)
+                - j++
+    - }

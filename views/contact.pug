@@ -1,7 +1,8 @@
 extends layout
 
 block content
-  //- a.btn.btn-success(href=`/contact/add`) Add contact
+  if (user)
+    a.btn.btn-success(href=`/contact/edit`) Edit Contact
   .row.mt-5
     .col-6.contact-address
       .center
@@ -16,4 +17,4 @@ block content
           i.fas.fa-map-marker-alt
           span  #{contact.location.address}
     .col-6
-      img#contactLogo(src="/public/img/logo/logo.jpeg" alt="Veterinarians List")
+      img#contactLogo(src="/public/uploads/logo.jpeg" alt="Veterinarians List")

@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable max-len */
 const mongoose = require('mongoose');
 const multer = require('multer');
 const jimp = require('jimp');
@@ -20,7 +22,7 @@ const multerOptions = {
 
 const getVets = async (req, res) => {
   const vetsList = await Vet.find();
-  res.render('vets', { vets: vetsList });
+  res.render('vets', { title: 'Vets List', vets: vetsList });
 };
 
 const getVetBySlug = async (req, res, next) => {
@@ -37,17 +39,50 @@ const addVet = async (req, res) => {
   res.render('edit', { title: 'Add Vet', tags, formAction: '/add' });
 };
 
-const upload = multer(multerOptions).single('vet_logo');
+const uploadImages = multer(multerOptions).fields([
+  { name: 'vet_logo', maxCount: 1 },
+  { name: 'vet_gallery', maxCount: 10 },
+]);
 
-const resize = async (req, res, next) => {
-  if (!req.file) return next();
+async function save(vetImages) {
+  const images = [];
+  for (const item in vetImages) {
+    if (Object.prototype.hasOwnProperty.call(vetImages, item)) {
+      const image = vetImages[item];
+      const extension = image.mimetype.split('/')[1];
+      const imageName = `${uuid.v4()}.${extension}`;
+      images.push(imageName);
+      image.newName = imageName;
+    }
+  }
+  return images;
+}
 
-  const extension = req.file.mimetype.split('/')[1];
-  req.body.vet_logo = `${uuid.v4()}.${extension}`;
-  const photo = await jimp.read(req.file.buffer);
-  await photo.resize(800, jimp.AUTO);
-  await photo.write(`./public/uploads/${req.body.vet_logo}`);
+function resize(vetImages, path) {
+  vetImages.forEach(async (item) => {
+    const photo = await jimp.read(item.buffer);
+    await photo.resize(800, jimp.AUTO);
+    await photo.write(path + item.newName);
+  });
+}
+
+const saveAndResizeImages = async (req, res, next) => {
+  if (!req.files) return next();
+  req.vet_gallery = {};
+  if (req.files.vet_logo) {
+    req.body.vet_logo = await save(req.files.vet_logo);
+    resize(req.files.vet_logo, `./public/uploads/vets_logos/${req.params.slug}/`);
+  }
+  if (req.files.vet_gallery) {
+    req.vetGallery = await save(req.files.vet_gallery);
+    resize(req.files.vet_gallery, `./public/uploads/vets_galleries/${req.params.slug}/`);
+  }
   next();
+};
+
+const removeImage = async (req, res) => {
+  await Vet.findOneAndUpdate({ vet_gallery: req.body.imageName }, { $pull: { vet_gallery: req.body.imageName } });
+  res.send({ status: 'successful' });
 };
 
 const createVet = async (req, res) => {
@@ -65,13 +100,13 @@ const editVet = async (req, res, next) => {
 };
 
 const updateVet = async (req, res) => {
-  const vet = await Vet.findOneAndUpdate({ slug: req.params.slug }, req.body);
+  const vet = await Vet.findOneAndUpdate({ slug: req.params.slug }, { $push: { vet_gallery: req.vetGallery }, ...req.body });
   res.redirect(`/vet/${vet.slug}`);
 };
 
 const getTop = async (req, res) => {
   const vetsList = await Vet.find().sort({ rate: -1 }).limit(10);
-  res.render('vets', { vets: vetsList });
+  res.render('vets', { title: 'Top 10 Vets', vets: vetsList });
 };
 
 const searchVets = async (req, res) => {
@@ -80,5 +115,5 @@ const searchVets = async (req, res) => {
 };
 
 module.exports = {
-  getVets, getVetBySlug, addVet, upload, resize, createVet, editVet, updateVet, getTop, searchVets,
+  getVets, getVetBySlug, addVet, uploadImages, saveAndResizeImages, removeImage, createVet, editVet, updateVet, getTop, searchVets,
 };

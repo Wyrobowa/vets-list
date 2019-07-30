@@ -1,5 +1,5 @@
 mixin vetCard(vet = {})
-    - const logoUrl = (vet.vet_logo) ? `/public/uploads/${vet.vet_logo}` : '/public/uploads/logo.jpeg'
+    - const logoUrl = (vet.vet_logo) ? `/public/uploads/vets_logos/${vet.slug}/${vet.vet_logo}` : '/public/uploads/vets_logos/logo.jpeg'
     a.list-group-item-action(href=`/vet/${vet.slug}`)
         img.card-img-top(src=logoUrl alt=vet.name)
         .card-body.bg-light

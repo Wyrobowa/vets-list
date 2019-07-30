@@ -45,6 +45,14 @@ mixin vetForm(vet = {}, tags = {}, formAction)
             label(for="vet_logo") Logo
             input(type="file" class="form-control-file" id="vet_logo" name="vet_logo")
             if vet.vet_logo 
-                img(src=`/public/uploads/${vet.vet_logo}` alt=vet.name width=200)
+                img(src=`/public/uploads/vets_logos/${vet.slug}/${vet.vet_logo}` alt=vet.name width=200)
+        .form-group.gallery
+            label(for="vet_gallery") Gallery
+            input(type="file" class="form-control-file" id="vet_gallery" name="vet_gallery" multiple)
+            if vet.vet_gallery
+                each image in vet.vet_gallery
+                    .gallery-small(id=image)
+                        img.image-small(src=`/public/uploads/vets_galleries/${vet.slug}/${image}` alt=vet.name width=200)
+                        span.js-removeGalleryImage.trash-small.trash-icon.fas.fa-trash(data-id=image)
         input.btn.btn-success(type="submit" value=title)
         
