@@ -19,6 +19,10 @@ html
                 a.nav-link(href=item.slug)
                   i.fas(class=item.icon)
                   span  #{item.title}
+          .navbar-nav.search
+            .input-group.input-group
+              input.form-control.search__input(type="search" name="search" placeholder="Find vet...")
+            .search__results
           ul.navbar-nav
             if (user)
               li.profile.nav-item
@@ -58,5 +62,5 @@ html
 
     block scripts
       script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
-      script(src="/public/js/index.js")
+      script(src="/public/dist/main.js")
       

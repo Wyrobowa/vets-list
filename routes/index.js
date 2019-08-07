@@ -67,7 +67,7 @@ router.get('/top', getTop);
 router.get('/contact', getContact);
 router.get('/contact/edit', isLoggedIn, editContact);
 router.post('/contact/edit', updateContact);
-router.post('/search', searchVets);
+router.get('/search', searchVets);
 router.get('/login', loginForm);
 router.post('/login', login);
 router.get('/logout', logout);
@@ -78,5 +78,7 @@ router.post('/account/edit', updateAccount);
 router.post('/account/forgot', forgotPassword);
 router.get('/account/reset/:token', resetPassword);
 router.post('/account/reset/:token', confirmedPassword, updatePassword);
+
+router.get('panel');
 
 module.exports = router;

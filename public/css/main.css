@@ -103,6 +103,43 @@ header .nav-item {
   width: 100%;
 }
 
+.button-group {
+  margin: 1rem 0;
+}
+
+.submit {
+  margin: 1.5rem 0;
+  border: 0.03rem solid #ced4da;
+}
+
+.search {
+  position: relative;
+  display: flex;
+}
+
+.search__results {
+  background: white;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 5;
+  border-radius: 0.3rem;
+  color: #212529;
+}
+
+.search__result {
+  color: #212529;
+  padding: 10px;
+  display: block;
+  border-bottom: 1px solid #ececec;
+}
+
+.search__result--active {
+  color: #212529;
+  background: #f1f1f1;
+}
+
 .trash-icon {
   color: rgb(255, 100, 100);
   cursor: pointer;

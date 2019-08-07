@@ -114,9 +114,11 @@ const confirmOwner = (vet, user) => {
 const editVet = async (req, res, next) => {
   const vet = await Vet.findOne({ slug: req.params.slug });
   if (!vet) return next();
+
   confirmOwner(vet, req.user);
   const tags = await Tag.find();
   const editors = await User.find({ level: 'editor' });
+
   res.render('editVet', {
     title: `Edit Vet: ${vet.name}`, vet, tags, editors, formAction: `/vet/${vet.slug}/edit`,
   });
@@ -134,13 +136,23 @@ const updateVet = async (req, res) => {
 };
 
 const getTop = async (req, res) => {
-  const vetsList = await Vet.find().sort({ rate: -1 }).limit(10);
+  const vetsList = await Vet.find().sort({ average_rate: -1 }).limit(10);
   res.render('vets', { title: 'Top 10 Vets', vets: vetsList });
 };
 
 const searchVets = async (req, res) => {
-  const vetsList = await Vet.find({ name: { $regex: req.body.search, $options: 'i' } });
-  res.render('vets', { title: `Results for "${req.body.search}"`, vets: vetsList });
+  const vetsList = await Vet.find({
+    // name: { $regex: req.body.search, $options: 'i' },
+    $text: {
+      $search: req.query.q,
+    },
+  }, {
+    score: { $meta: 'textScore' },
+  }).sort({
+    score: { $meta: 'textScore' },
+  });
+  res.json(vetsList);
+  // res.render('vets', { title: `Results for "${req.body.search}"`, vets: vetsList });
 };
 
 module.exports = {

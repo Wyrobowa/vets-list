@@ -23,24 +23,37 @@ mixin vetForm(vet = {}, tags = {}, editors = {}, formAction)
                     input(type="checkbox" id=tag._id value=tag._id name="tags" class="form-check-input" checked=(parsedVetTags.includes(tag._id.toString())))
                     label(for=tag._id class="form-check-label") #{tag.name}
         .form-group
-            label(for="vet_logo") Logo
-            input(type="file" class="form-control-file" id="vet_logo" name="vet_logo")
+            .input-group
+                .input-group-prepend
+                    span.input-group-text(for="vet_logo") Logo
+                .custom-file
+                    input(type="file" class="custom-file-input" id="vet_logo" name="vet_logo")
+                    label.custom-file-label Choose file
             if vet.vet_logo 
                 img(src=`/public/uploads/vets_logos/${vet.slug}/${vet.vet_logo}` alt=vet.name width=200)
-        .form-group.gallery
-            label(for="vet_gallery") Gallery
-            input(type="file" class="form-control-file" id="vet_gallery" name="vet_gallery" multiple)
+        .form-group
+            .input-group.gallery
+                .input-group-prepend
+                    span.input-group-text(for="vet_gallery") Gallery
+                .custom-file
+                    input(type="file" class="custom-file-input" id="vet_gallery" name="vet_gallery" multiple)
+                    label.custom-file-label Choose files
             if vet.vet_gallery
                 each image in vet.vet_gallery
                     .gallery-small(id=image)
                         img.image-small(src=`/public/uploads/vets_galleries/${vet.slug}/${image}` alt=vet.name width=200)
                         span.js-removeGalleryImage.trash-small.trash-icon.fas.fa-trash(data-id=image)
         .form-group
-            - const vetEditors = vet.editors || []
-            - const parsedVetEditors = vetEditors.join(',').split(',')
-            label.font-weight-light Assign editor(s):
-            select.form-control(name='editors' multiple)
-                each editor in editors
-                    option.text-uppercase(name=editor._id value=editor._id selected=(parsedVetEditors.includes(editor._id.toString())))= `${editor.first_name} ${editor.last_name}`
-        input.btn.btn-success(type="submit" value=title)
+            .input-group
+                - const vetEditors = vet.editors || []
+                - const parsedVetEditors = vetEditors.join(',').split(',')
+                .input-group-prepend
+                    label.input-group-text.font-weight-light Assign editor(s)
+                select.custom-select(name='editors' size=5 multiple)
+                    each editor in editors
+                        option.text-uppercase(name=editor._id value=editor._id selected=(parsedVetEditors.includes(editor._id.toString())))= `${editor.first_name} ${editor.last_name}`
+        .submit
+        .button-group
+            input.btn.btn-success(type="submit" value="Edit")
+            input.btn.btn-danger.float-right(type="submit" value="Delete")
         

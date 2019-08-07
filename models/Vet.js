@@ -45,6 +45,11 @@ const vetSchema = new mongoose.Schema({
   },
 });
 
+vetSchema.index({
+  name: 'text',
+  description: 'text',
+});
+
 vetSchema.pre('save', async function (next) {
   if (!this.isModified('name')) return next();
   this.slug = slug(this.name);
