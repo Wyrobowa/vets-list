@@ -13,23 +13,31 @@ html
         nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           a(href='/')
             img#logo(src="/public/uploads/logo.jpeg" alt="Veterinarians List")
-          ul.navbar-nav
+          ul.navbar-nav.mr-auto
             each item in h.menu
               li.nav-item
                 a.nav-link(href=item.slug)
                   i.fas(class=item.icon)
                   span  #{item.title}
-          .auth-buttons
+          ul.navbar-nav
             if (user)
-              .profile
-                a(href='/account')= `${user.first_name} ${user.last_name}`
-              .logout
-                a(href='/logout') Logout
+              li.profile.nav-item
+                a.nav-link(href='/account')
+                  i.fas.fa-user-circle
+                  span= ` ${user.first_name} ${user.last_name}`
+              li.logout.nav-item
+                a.nav-link(href='/logout')
+                  i.fas.fa-sign-out-alt
+                  span  Logout
             else
-              .login
-                a(href='/login') Login
-              .register
-                a(href='/register') Register
+              li.login.nav-item
+                a.nav-link(href='/login')
+                  i.fas.fa-sign-in-alt
+                  span  Login
+              li.register.nav-item
+                a.nav-link(href='/register')
+                  i.fas.fa-user-plus
+                  span  Register
 
     block messages
       if locals.flashes

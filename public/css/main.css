@@ -6,22 +6,12 @@ header .nav-item {
   margin: 0 10px;
 }
 
-header .auth-buttons {
-  position: absolute;
-  right: 1em;
-}
-
 .container {
   margin-top: 2rem;
   min-height: calc(100vh - 9.6rem);
 }
 
 .flash {
-  /* border: solid 1px red;
-  padding: 0.5em;
-  font-size: 0.8em;
-  font-weight: lighter;
-  margin: 1em 0; */
   background: white;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
   margin-bottom: 2rem;
@@ -117,6 +107,52 @@ header .auth-buttons {
   color: rgb(255, 100, 100);
   cursor: pointer;
 }
+
+.white-spaces {
+  white-space: pre-wrap;
+}
+
+/** Star rating */
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: "Font Awesome 5 Free";
+  cursor: pointer;
+  font-size: 1.5rem
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner i::before {
+  color: #1fb986e8;
+}
+
+.stars .fa-star:hover, .stars .fa-star:hover::before {
+  color: #f8ce0b;
+}
+
+.message {
+  font-size: 0.75rem;
+  color: chocolate;
+  margin: auto;
+}
+
+.message.message-clicked {
+  -webkit-animation:scaleme 1s;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes scaleme {
+  0% { -webkit-transform: scale(1); opacity: 1; }
+  100% { -webkit-transform: scale(0.1); opacity: 0; display:none; }
+} 
 
 footer {
   height: 3rem;

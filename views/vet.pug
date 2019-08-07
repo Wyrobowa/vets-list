@@ -1,18 +1,23 @@
 extends layout
 
+include mixins/_ratingStars
+
 block content
-    .form-group
-        a.btn.btn-primary(href=`/vet/${vet.slug}/edit`) Edit
-    - const logoUrl = (vet.vet_logo) ? vet.vet_logo : './logo.jpeg'
-    img.float-right.ml-3(src=`/public/uploads/vets_logos/${vet.slug}/${logoUrl}` alt=vet.name width=300)
+    - const vetEditors = vet.editors || []
+    - const parsedVetEditors = vetEditors.join(',').split(',')
+    if admin || (user && parsedVetEditors.includes(user._id.toString()))
+        .form-group
+            a.btn.btn-primary(href=`/vet/${vet.slug}/edit`) Edit
+    - const logoUrl = (vet.vet_logo) ? `${vet.slug}/${vet.vet_logo}` : 'logo.jpeg'
+    img.float-right.ml-3(src=`/public/uploads/vets_logos/${logoUrl}` alt=vet.name width=300)
     .form-group
         h2 #{vet.name}
     .form-group
-        span.rate Rate: #{vet.rate}
+        +ratingStars(vet)
     .form-group
-        span.font-weight-light #{vet.description}
+        span.font-weight-light.white-spaces #{vet.description}
     .form-group
-        each tag in tags
+        each tag in vet.tags
             span.badge.badge-pill.badge-secondary.mr-1= tag.name
     h4.small-title Address
     .form-group

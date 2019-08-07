@@ -41,6 +41,9 @@ const {
   removeTag,
 } = require('../controllers/tagsController');
 const {
+  createVetRating,
+} = require('../controllers/ratingControler');
+const {
   getContact,
   editContact,
   updateContact,
@@ -48,12 +51,14 @@ const {
 
 router.get('/', homePage);
 router.get('/vets', getVets);
+router.post('/vets/rate', createVetRating);
 router.get('/vet/:slug', getVetBySlug);
+router.post('/vet/:slug/rate', createVetRating);
 router.get('/vet/:slug/edit', editVet);
 router.post('/vet/:slug/edit', uploadImages, saveAndResizeImages, updateVet);
 router.post('/vet/:slug/edit/remove', removeImage);
-router.get('/add', isLoggedIn, addVet);
-router.post('/add', uploadImages, saveAndResizeImages, createVet);
+router.get('/vets/add', isLoggedIn, addVet);
+router.post('/vets/add', uploadImages, saveAndResizeImages, createVet);
 router.get('/tags', getTags);
 router.get('/tags/add', isLoggedIn, addTag);
 router.post('/tags/add', createTag);

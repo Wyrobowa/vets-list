@@ -20,6 +20,7 @@ require('./models/Vet');
 require('./models/Tag');
 require('./models/Contact');
 require('./models/User');
+require('./models/Rating');
 
 const helpers = require('./helpers');
 const routes = require('./routes/index');
@@ -56,6 +57,7 @@ app.use((req, res, next) => {
   res.locals.h = helpers;
   res.locals.flashes = req.flash();
   res.locals.user = req.user || null;
+  res.locals.admin = req.user && (req.user.level === 'admin');
   res.locals.currentPath = req.path;
   next();
 });
@@ -65,7 +67,7 @@ app.use((req, res, next) => {
   next();
 });
 
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true });
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useCreateIndex: true });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   console.log(`DB Error! -  ${err}`);

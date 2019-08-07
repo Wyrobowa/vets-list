@@ -8,6 +8,10 @@ mixin registerForm()
     .form-group
       input.form-control(type="email" name="email" placeholder="Email")
     .form-group
+      label.font-weight-light User permissions:
+      select.form-control(name="level")
+        option(name="editor" value="editor" selected)= "Editor"
+    .form-group
       input.form-control(type="password" name="password" placeholder="Password")
     .form-group
       input.form-control(type="password" name="password_confirmation" placeholder="Password confirmation")

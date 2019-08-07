@@ -15,8 +15,11 @@ const vetSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  rate: Number,
-  tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
+  average_rate: Number,
+  tags: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tag',
+  }],
   location: {
     type: {
       type: String,
@@ -31,6 +34,11 @@ const vetSchema = new mongoose.Schema({
   },
   vet_logo: String,
   vet_gallery: [String],
+  editors: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: 'You must supply an user!',
+  }],
   created: {
     type: Date,
     default: Date.now,
