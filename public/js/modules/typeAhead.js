@@ -1,5 +1,6 @@
 /* eslint-disable */
 const axios = require('axios');
+const dompurify = require('dompurify');
 
 const searchResultsHTML = (vets) => {
   return vets.map(vet => {
@@ -25,14 +26,16 @@ const typeAhead = (search) => {
     }
 
     searchResult.style.display = 'block';
-    searchResult.innerHTML = '';
 
     axios
       .get(`/search?q=${event.target.value}`)
       .then(res => {
         if (res.data.length) {
-          searchResult.innerHTML = searchResultsHTML(res.data);
+          searchResult.innerHTML = dompurify.sanitize(searchResultsHTML(res.data));
+          return;
         }
+
+        searchResult.innerHTML = dompurify.sanitize(`<div class="search__result">No results for: <strong>${event.target.value}</strong> found!</div>`);
       })
       .catch(err => {
         console.log(err);

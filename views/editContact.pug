@@ -3,6 +3,11 @@ extends layout
 block content
     h2.title #{title}
 
+    .form-group
+        button.btn.btn-info.btn-sm(onclick="history.back(-1)")
+            i.fas.fa-arrow-left
+            span  Back
+
     form.edit(action='/contact/edit' method="POST")
         .form-group
             label(for="name") Name

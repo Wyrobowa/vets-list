@@ -5,6 +5,10 @@ include mixins/_ratingStars
 block content
     - const vetEditors = vet.editors || []
     - const parsedVetEditors = vetEditors.join(',').split(',')
+    .form-group
+        button.btn.btn-info.btn-sm(onclick="history.back(-1)")
+            i.fas.fa-arrow-left
+            span  Back
     if admin || (user && parsedVetEditors.includes(user._id.toString()))
         .form-group
             a.btn.btn-primary(href=`/vet/${vet.slug}/edit`) Edit
