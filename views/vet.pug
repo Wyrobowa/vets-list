@@ -22,7 +22,10 @@ block content
         span.font-weight-light.white-spaces #{vet.description}
     .form-group
         each tag in vet.tags
-            span.badge.badge-pill.badge-secondary.mr-1= tag.name
+            .tag(data-value=tag._id)
+                span= tag.name
+    .clearfix
+    .submit
     h4.small-title Address
     .form-group
         span.single__location.font-weight-bold= vet.location.address

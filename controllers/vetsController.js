@@ -142,7 +142,6 @@ const getTop = async (req, res) => {
 
 const searchVets = async (req, res) => {
   const vetsList = await Vet.find({
-    // name: { $regex: req.body.search, $options: 'i' },
     $text: {
       $search: req.query.q,
     },
@@ -152,7 +151,6 @@ const searchVets = async (req, res) => {
     score: { $meta: 'textScore' },
   });
   res.json(vetsList);
-  // res.render('vets', { title: `Results for "${req.body.search}"`, vets: vetsList });
 };
 
 module.exports = {

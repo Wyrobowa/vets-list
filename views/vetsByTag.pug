@@ -1,11 +1,13 @@
 extends layout
 
+include mixins/_tagsList
 include mixins/_vetCard
 
 block content
     h2.title #{title}
-    //- if (user)
-    //-     a.btn.btn-success(href=`/vets/add`) Add vet
+    +tagsList(tags, activeTag, vets)
+    .clearfix
+    .submit
     .row
         each vet in vets
             .col-6.col-md-4

@@ -5,6 +5,9 @@ const {
   homePage,
 } = require('../controllers/indexController');
 const {
+  admin,
+} = require('../controllers/adminController');
+const {
   login,
   logout,
   isLoggedIn,
@@ -39,6 +42,7 @@ const {
   addTag,
   createTag,
   removeTag,
+  getVetsListByTag,
 } = require('../controllers/tagsController');
 const {
   createVetRating,
@@ -64,6 +68,7 @@ router.post('/vet/:slug/edit/remove', removeImage);
 router.get('/vets/add', isLoggedIn, addVet);
 router.post('/vets/add', sanitizeRequest, uploadImages, saveAndResizeImages, createVet);
 router.get('/tags', getTags);
+router.get('/tag/:slug', getVetsListByTag);
 router.get('/tags/add', isLoggedIn, addTag);
 router.post('/tags/add', sanitizeRequest, createTag);
 router.post('/tags/remove', removeTag);
@@ -83,6 +88,6 @@ router.post('/account/forgot', sanitizeRequest, forgotPassword);
 router.get('/account/reset/:token', resetPassword);
 router.post('/account/reset/:token', sanitizeRequest, confirmedPassword, updatePassword);
 
-router.get('panel');
+router.get('/admin', admin);
 
 module.exports = router;

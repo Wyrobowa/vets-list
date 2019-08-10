@@ -149,6 +149,21 @@ header .nav-item {
   white-space: pre-wrap;
 }
 
+.tag {
+  background: #5F9EA0;
+  float: left;
+  margin-right: 1.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #274142;
+}
+.tag.active-tag {
+  background: #b9d4d6;
+}
+
 /** Star rating */
 .stars-outer {
   display: inline-block;
@@ -190,6 +205,10 @@ header .nav-item {
   0% { -webkit-transform: scale(1); opacity: 1; }
   100% { -webkit-transform: scale(0.1); opacity: 0; display:none; }
 } 
+
+ul li {
+  list-style-type: none;
+}
 
 footer {
   height: 3rem;

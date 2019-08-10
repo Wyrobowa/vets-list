@@ -1,0 +1,12 @@
+mixin tagsList(tags = {}, activeTag, vets = {})
+    //- if (user)
+        //- a.btn.btn-success(href=`/tags/add`) Add tag
+    .mt-2
+        each tag in tags
+            - let activeTagClass = ''
+            - if (activeTag && tag.name === activeTag.name) {
+            - activeTagClass = 'active-tag'
+            - }
+            a.tag(id=tag._id class=activeTagClass href=`/tag/${tag.slug}`)= tag.name
+                //- if (admin)
+                //-     span.js-removeTag.trash-icon.fas.fa-trash.float-right(data-id=tag._id)

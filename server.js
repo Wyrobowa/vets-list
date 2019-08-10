@@ -24,6 +24,7 @@ require('./models/Rating');
 
 const helpers = require('./helpers');
 const routes = require('./routes/index');
+const routesAdmin = require('./routes/admin');
 
 // handlers
 require('./handlers/passport');
@@ -77,6 +78,7 @@ app.use(morgan('dev'));
 
 // routes
 app.use('/', routes);
+app.use('/api/admin', routesAdmin);
 
 // setting port
 app.set('port', process.env.PORT || 9000);

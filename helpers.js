@@ -11,4 +11,13 @@ const menu = [
   { slug: '/contact', title: 'Contact', icon: 'fa-phone' },
 ];
 
-module.exports = { menu, staticMap, dump };
+const adminMenu = [
+  { slug: '/admin/users', title: 'Users', icon: 'fa-user' },
+  { slug: '/admin/vets', title: 'Vets', icon: 'fa-paw' },
+  { slug: '/admin/tags', title: 'Tags', icon: 'fa-tags' },
+  { slug: '/admin/contact', title: 'Contact Info', icon: 'fa-phone' },
+];
+
+module.exports = {
+  menu, adminMenu, staticMap, dump,
+};
