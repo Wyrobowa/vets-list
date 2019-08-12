@@ -1,10 +1,14 @@
-.container {
-  margin-top: 2rem;
+.container-fluid {
+  margin-top: 1rem;
   min-height: calc(100vh - 9.6rem);
 }
 
+.users, .vets, .tags, .contact {
+  position: relative;
+}
+
 img {
-  max-width: 10rem;
+  max-width: 5rem;
   max-height: 5rem;
 }
 
@@ -25,6 +29,19 @@ img {
 
 .action-button {
   margin: 0 0.3rem;
+  cursor: pointer;
+}
+.action-button .fa-edit {
+  color: rgb(68, 156, 238);
+}
+.action-button .fa-trash {
+  color: rgb(255, 100, 100);
+}
+
+span.add-button {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 footer {

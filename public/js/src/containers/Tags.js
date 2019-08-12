@@ -12,7 +12,7 @@ const Tags = () => {
   }, []);
 
   return (
-    <div className="tags">
+    <div className="tags table-hover">
       <h1>Tags List</h1>
       <table className="table">
         <thead className="thead-dark">

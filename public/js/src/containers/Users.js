@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import ActionButtons from '../components/ActionButtons';
+import AddButton from '../components/AddButton';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -14,7 +15,8 @@ const Users = () => {
   return (
     <div className="users">
       <h1>Users List</h1>
-      <table className="table">
+      <AddButton/>
+      <table className="table table-hover">
         <thead className="thead-dark">
           <tr>
             <th scope="col">First Name</th>

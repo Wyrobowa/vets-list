@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import TagList from '../components/TagList';
 import VetGallery from '../components/VetGallery';
 import ActionButtons from '../components/ActionButtons';
+import AddButton from '../components/AddButton';
 
 const Vets = () => {
   const [vets, setVets] = useState([]);
@@ -16,7 +17,8 @@ const Vets = () => {
   return (
     <div className="vets">
       <h1>Vets List</h1>
-      <table className="table">
+      <AddButton/>
+      <table className="table table-hover">
         <thead className="thead-dark">
           <tr>
             <th scope="col">Name</th>
@@ -35,9 +37,10 @@ const Vets = () => {
                 <td>{vet.name}</td>
                 <td><TagList tags={vet.tags}/></td>
                 <td>{vet.location.address}</td>
-                <td><img src={`/public/uploads/vets_logos/${vetLogo}`} alt={vet.name}/></td>
-                <td><VetGallery images={vet.vet_gallery} vetSlug={vet.slug} vetName={vet.name}/></td>
-                <td><ActionButtons/></td>
+                <td className="text-center"><img src={`/public/uploads/vets_logos/${vetLogo}`} alt={vet.name}/></td>
+                {/* <td><VetGallery images={vet.vet_gallery} vetSlug={vet.slug} vetName={vet.name}/></td> */}
+                <td className="text-center">{(vet.vet_gallery.length > 0) ? vet.vet_gallery.length : ''}</td>
+                <td className="text-center"><ActionButtons/></td>
               </tr>
             );
           })}

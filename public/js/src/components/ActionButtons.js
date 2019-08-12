@@ -8,8 +8,8 @@ import {
 const ActionButtons = () => {
   return (
     <span>
-      <Link to="#" className="btn btn-small btn-info action-button">Edit</Link>
-      <Link to="#" className="btn btn-small btn-danger action-button">Delete</Link>
+      <Link to="/admin/user/:slug/edit" className="action-button"><i className="fas fa-edit"></i></Link>
+      <Link to="/admin/user/:slug/delete" className="action-button"><i className="fas fa-trash"></i></Link>
     </span>
   );
 }
