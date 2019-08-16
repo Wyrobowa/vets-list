@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from "react-router";
 
 import TagList from '../components/TagList';
-import VetGallery from '../components/VetGallery';
-import ActionButtons from '../components/ActionButtons';
-import AddButton from '../components/AddButton';
+import Flash from '../components/FlashMessages';
 
-const Vets = () => {
+const Vets = (props) => {
   const [vets, setVets] = useState([]);
 
   useEffect(() => {
@@ -16,8 +15,13 @@ const Vets = () => {
 
   return (
     <div className="vets">
-      <h1>Vets List</h1>
-      <AddButton/>
+      {props.location.state
+        && <Flash flash={props.location.state} />
+      }
+      <div className="title">
+        <h1>Vets List</h1>
+        
+      </div>
       <table className="table table-hover">
         <thead className="thead-dark">
           <tr>
@@ -38,9 +42,8 @@ const Vets = () => {
                 <td><TagList tags={vet.tags}/></td>
                 <td>{vet.location.address}</td>
                 <td className="text-center"><img src={`/public/uploads/vets_logos/${vetLogo}`} alt={vet.name}/></td>
-                {/* <td><VetGallery images={vet.vet_gallery} vetSlug={vet.slug} vetName={vet.name}/></td> */}
                 <td className="text-center">{(vet.vet_gallery.length > 0) ? vet.vet_gallery.length : ''}</td>
-                <td className="text-center"><ActionButtons/></td>
+                <td className="text-center"></td>
               </tr>
             );
           })}
@@ -51,4 +54,4 @@ const Vets = () => {
   );
 }
 
-export default Vets;
+export default withRouter(Vets);

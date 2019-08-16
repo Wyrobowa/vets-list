@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from "react-router";
 
-import ActionButtons from '../components/ActionButtons';
-import AddButton from '../components/AddButton';
+import Flash from '../components/FlashMessages';
+import Button from '../components/Button';
+import Icon from '../components/Icon';
 
-const Users = () => {
+const Users = (props) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -14,8 +16,16 @@ const Users = () => {
 
   return (
     <div className="users">
-      <h1>Users List</h1>
-      <AddButton/>
+      {props.location.state
+        && <Flash flash={props.location.state} />
+      }
+      <div className="title">
+        <h1>Users List</h1>
+        <Button buttonType="link" model="info" link='user/add'>
+          <Icon type="add" />
+          Add new user
+        </Button>
+      </div>
       <table className="table table-hover">
         <thead className="thead-dark">
           <tr>
@@ -31,7 +41,7 @@ const Users = () => {
               <td>{user.last_name}</td>
               <td>{user.first_name}</td>
               <td>{user.email}</td>
-              <td><ActionButtons/></td>
+              <td></td>
             </tr>
           ))}
         </tbody>
@@ -41,4 +51,4 @@ const Users = () => {
   );
 }
 
-export default Users;
+export default withRouter(Users);

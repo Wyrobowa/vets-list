@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from "react-router";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
 
-import ActionButtons from '../components/ActionButtons';
+import Flash from '../components/FlashMessages';
 
-const Contact = () => {
+const Contact = (props) => {
   const [contact, setContact] = useState({
     name: '',
     email: '',
@@ -70,8 +71,11 @@ const Contact = () => {
 
   return (
     <div className="contact">
+      {props.location.state
+        && <Flash flash={props.location.state} />
+      }
       <h1>Contact Info</h1>
-      <ActionButtons/>
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name</label>
@@ -87,15 +91,15 @@ const Contact = () => {
         </div>
         <div className="form-group">
           <label>Address</label>
-          <input type="text" id="address" name="addressAdmin" onChange={handleAddressChange} placeholder="Full address" 
+          <input type="text" id="address" name="addressContact" onChange={handleAddressChange} placeholder="Full address" 
           className="form-control"  value={contact.address} />
         </div>
         <div className="form-group">
           <label>Address Lng</label>
-          <input type="text" id="lng" name="latAdmin" className="form-control"
+          <input type="text" id="lng" name="latContact" className="form-control" readOnly
           placeholder="Longitude" required defaultValue={contact.lng} />
           <label>Address Lat</label>
-          <input type="text" id="lat" name="lngAdmin" className="form-control" 
+          <input type="text" id="lat" name="lngContact" className="form-control" readOnly
           placeholder="Latitude" required defaultValue={contact.lat} />
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
@@ -105,4 +109,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default withRouter(Contact);
