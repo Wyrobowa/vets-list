@@ -14,7 +14,7 @@ const Vets = (props) => {
   }, []);
 
   return (
-    <div className="vets">
+    <div className="vets-container">
       {props.location.state
         && <Flash flash={props.location.state} />
       }

@@ -80,7 +80,7 @@ const Vet = (props) => {
   };
 
   return (
-    <div className="user">
+    <div className="vet-container">
       <h1>Vet</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

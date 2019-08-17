@@ -52,7 +52,7 @@ const EditTag = (props) => {
   };
 
   return (
-    <div className="tag">
+    <div className="tag-container">
       <h1>{`Edit tag: ${tagData.name}`}</h1>
       <BackButton link={props.history.goBack} />
       <form>

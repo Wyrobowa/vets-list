@@ -38,7 +38,7 @@ const AddTag = (props) => {
   };
 
   return (
-    <div className="tag">
+    <div className="tag-container">
       <h1>Add new tag</h1>
       <BackButton link={props.history.goBack} />
       <form>

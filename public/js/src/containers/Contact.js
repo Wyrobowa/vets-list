@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from "react-router";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
 
 import Flash from '../components/FlashMessages';
+import Button from '../components/Button';
+import Icon from '../components/Icon';
 
 const Contact = (props) => {
   const [contact, setContact] = useState({
     name: '',
     email: '',
     phone: '',
-    address: '',
-    lng: '',
-    lat: '',
+    location: {
+      address: '',
+      coordinates: {
+        lng: '',
+        lat: '',
+      },
+    },
   });
+
+  const [flash, setFlash] = useState(false);
 
   useEffect(() => {
     fetch('/api/admin/contact')
       .then(response => response.json())
       .then((data) => {
-        data.address = data.location.address;
-        data.lng = data.location.coordinates[0];
-        data.lat = data.location.coordinates[1];
         setContact(data);
+        if (props.location.state) {
+          setFlash(props.location.state);
+        }
       })
   }, []);
 
@@ -35,47 +39,50 @@ const Contact = (props) => {
     })
   };
 
-  const handleAddressChange = (event) => {
-    geocodeByAddress(event.target.value)
-      .then((results) => getLatLng(results[0]))
-      .then((results) => {
+  const googleMaps = (event) => {
+    setContact({
+      ...contact,
+      location: {
+        address: event.target.value,
+        coordinates: ['', ''],
+      }
+    });
+    const autocomplete = new google.maps.places.Autocomplete(event.target);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
         setContact({
           ...contact,
-          lat: results.lat,
-          lng: results.lng,
+          location: {
+            address: place.formatted_address,
+            coordinates: [place.geometry.location.lng() || '', place.geometry.location.lat() || ''],
+          }
         });
-      })
-      .catch(error => console.error('Error', error));
-  };
-
-  const assignLocationFields = () => ({
-    ...contact,
-    location: {
-      address: contact.address || '',
-      coordinates: [contact.lng || '', contact.lat || ''],
-    }
-  });
+    });
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const {address, lng, lat, ...parsedData} = assignLocationFields();
 
     fetch('/api/admin/contact/edit', { 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ parsedData } )
-     }).then(response => response.json());
+      body: JSON.stringify({ contact } )
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data);
+      setFlash(data);
+    });
   };
 
   return (
-    <div className="contact">
-      {props.location.state
-        && <Flash flash={props.location.state} />
+    <div className="contact-container">
+      {flash
+        && <Flash flash={flash}/>
       }
       <h1>Contact Info</h1>
-
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name</label>
@@ -91,18 +98,21 @@ const Contact = (props) => {
         </div>
         <div className="form-group">
           <label>Address</label>
-          <input type="text" id="address" name="addressContact" onChange={handleAddressChange} placeholder="Full address" 
-          className="form-control"  value={contact.address} />
+          <input type="text" id="address" name="addressContact" onChange={googleMaps} placeholder="Full address" 
+          className="form-control"  value={contact.location.address} />
         </div>
         <div className="form-group">
           <label>Address Lng</label>
           <input type="text" id="lng" name="latContact" className="form-control" readOnly
-          placeholder="Longitude" required defaultValue={contact.lng} />
+          placeholder="Longitude" required defaultValue={contact.location.coordinates[1]} />
           <label>Address Lat</label>
           <input type="text" id="lat" name="lngContact" className="form-control" readOnly
-          placeholder="Latitude" required defaultValue={contact.lat} />
+          placeholder="Latitude" required defaultValue={contact.location.coordinates[0]} />
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <Button buttonType="button" type="submit" size="normal" model="success" handleClick={handleSubmit}>
+          <Icon type="edit" />
+          Edit contact info
+        </Button>
       </form>
       
     </div>

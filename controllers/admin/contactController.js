@@ -9,15 +9,15 @@ const getContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   const contact = await Contact.findOneAndUpdate(
-    { email: req.body.parsedData.email },
-    { $set: req.body.parsedData },
+    { email: req.body.contact.email },
+    { $set: req.body.contact },
   );
 
   if (!contact) {
     await (new Contact(req.body)).save();
   }
 
-  res.redirect('/admin/#/admin/contact');
+  res.json({ status: 'success', msg: 'You have successfully updated contact info!' });
 };
 
 module.exports = { getContact, updateContact };

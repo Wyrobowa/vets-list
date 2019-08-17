@@ -41,7 +41,7 @@ const Users = (props) => {
   }
 
   return (
-    <div className="users">
+    <div className="users-container">
       {props.location.state
         && <Flash flash={props.location.state} />
       }

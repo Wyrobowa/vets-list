@@ -17,7 +17,6 @@
     },
     "rules": {
         "consistent-return": 0,
-        "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
         "react/forbid-prop-types": [true, { "forbid": "any", "checkContextTypes": true, "checkChildContextTypes": true }],
         "import/prefer-default-export": "off",
         "no-new": 0,

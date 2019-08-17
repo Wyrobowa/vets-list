@@ -3,7 +3,7 @@
   min-height: calc(100vh - 9.6rem);
 }
 
-.users, .vets, .tags, .contact {
+.users-container, .vets-container, .tags-container, .contact-container {
   position: relative;
 }
 
@@ -53,41 +53,34 @@ img {
   border: 0.03rem solid #ced4da;
 }
 
+.flash-messages {
+  animation: slide 2s ease 2.5s forwards;
+  position: fixed;
+  z-index: 9999;
+  top: 50px;
+  right: 50px;
+}
+
+@keyframes slide {
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: hidden;
+  }
+}
+
 .flash {
   background: white;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-  margin-bottom: 2rem;
-  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  padding: 0.4rem;
   position: relative;
-  z-index: 1;
   border-radius: 3px;
   display: flex;
-  animation: slideIn forwards .1s ease-in-out 2;
-  animation-timing-function: cubic-bezier(0.01, 1.68, 0.58, 1);
 }
 
 .flash .flash__text {
   flex: 1;
-}
-.flash .flash__remove {
-  background: none;
-  border:0;
-}
-.flash .flash__remove:hover {
-  color: #FFC40E;
-}
-.flash:after {
-  content: '';
-  display: block;
-  background: white;
-  position: absolute;
-  width: calc(100% - 16px);
-  height: calc(100% - 16px);
-  top: 8px;
-  left: 8px;
-  z-index: -1;
-  box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
-  border-radius: 3px;
 }
 
 .flash.flash--success {
@@ -100,7 +93,10 @@ img {
   background: linear-gradient(35deg, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%);
 }
 .flash p {
+  background: white;
   margin: 0;
+  padding: 5px;
+  font-size: 0.8rem;
 }
 
 footer {

@@ -56,7 +56,7 @@ const AddUser = (props) => {
   };
 
   return (
-    <div className="user">
+    <div className="user-container">
       <h1>Add new user</h1>
       <BackButton link={props.history.goBack} />
       <form>

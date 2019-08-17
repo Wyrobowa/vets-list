@@ -7,11 +7,17 @@ import Icon from '../components/Icon';
 
 const Tags = (props) => {
   const [tags, setTags] = useState([]);
+  const [flash, setFlash] = useState(false);
 
   useEffect(() => {
     fetch('/api/admin/tags')
       .then(response => response.json())
-      .then(data => setTags(data));
+      .then((data) => {
+        setTags(data);
+        if (props.location.state) {
+          setFlash(props.location.state);
+        }
+      });
   }, []);
 
   const removeTag = (event) => {
@@ -30,20 +36,21 @@ const Tags = (props) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ tags } )
-      })
-      .then(response => response.json())
-      .then((data) => {
-        if (data.status === 'success') {
-          const updatedTags = tags.filter(tag => tag._id !== id)
-          setTags(updatedTags);
-        }
-      });
+    })
+    .then(response => response.json())
+    .then((data) => {
+      if (data.status === 'success') {
+        const updatedTags = tags.filter(tag => tag._id !== id)
+        setTags(updatedTags);
+        setFlash(data);
+      }
+    });
   }
 
   return (
-    <div className="tags table-hover">
-      {props.location.state
-        && <Flash flash={props.location.state} />
+    <div className="tags-container table-hover">
+      {flash
+        && <Flash flash={flash}/>
       }
       <div className="title">
         <h1>Tags List</h1>

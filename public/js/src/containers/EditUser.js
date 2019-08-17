@@ -48,15 +48,15 @@ const User = (props) => {
      .then((data) => {
       if (data.status === 'success') {
         props.history.push({
-         pathname: '/admin/users',
-         state: data,
-       });
+          pathname: '/admin/users',
+          state: data,
+        });
       }
      });
   };
 
   return (
-    <div className="user">
+    <div className="user-container">
       <h1>{`Edit user: ${userData.user.first_name} ${userData.user.last_name}`}</h1>
       <BackButton link={props.history.goBack} />
       <form>
