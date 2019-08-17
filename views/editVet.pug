@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_vetForm
+
+block content
+    .form-group
+        button.btn.btn-info.btn-sm(onclick="history.back(-1)")
+            i.fas.fa-arrow-left
+            span  Back
+            
+    h2.title #{title}
+    +vetForm(vet, tags, editors, formAction)

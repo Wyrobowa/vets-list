@@ -2,12 +2,22 @@ const staticMap = ([lng, lat]) => `https://maps.googleapis.com/maps/api/staticma
   process.env.MAP_KEY
 }&markers=${lat},${lng}&scale=2`;
 
+const dump = obj => JSON.stringify(obj, null, 2);
+
 const menu = [
   { slug: '/vets', title: 'List of Vets', icon: 'fa-paw' },
   { slug: '/tags', title: 'Tags', icon: 'fa-tags' },
   { slug: '/top', title: 'Top Vets', icon: 'fa-thumbs-up' },
-  // { slug: '/add', title: 'Add Vet', icon: 'fa-plus-square' },
   { slug: '/contact', title: 'Contact', icon: 'fa-phone' },
 ];
 
-module.exports = { menu, staticMap };
+const adminMenu = [
+  { slug: '/admin/users', title: 'Users', icon: 'fa-user' },
+  { slug: '/admin/vets', title: 'Vets', icon: 'fa-paw' },
+  { slug: '/admin/tags', title: 'Tags', icon: 'fa-tags' },
+  { slug: '/admin/contact', title: 'Contact Info', icon: 'fa-phone' },
+];
+
+module.exports = {
+  menu, adminMenu, staticMap, dump,
+};

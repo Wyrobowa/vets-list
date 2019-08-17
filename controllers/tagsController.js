@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 
 const Tag = mongoose.model('Tag');
@@ -23,9 +24,19 @@ const removeTag = async (req, res) => {
   res.send({ status: 'successful' });
 };
 
+const getVetsListByTag = async (req, res) => {
+  const tags = await Tag.find();
+  const activeTag = await Tag.findOne({ slug: req.params.slug });
+  const vets = await Vet.find({ tags: { $all: [activeTag._id] } });
+  res.render('vetsByTag', {
+    title: 'Tags', tags, activeTag, vets,
+  });
+};
+
 module.exports = {
   getTags,
   addTag,
   createTag,
   removeTag,
+  getVetsListByTag,
 };

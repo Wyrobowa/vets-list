@@ -1,38 +1,19 @@
-mixin vetForm(vet = {}, tags = {}, formAction)
+mixin vetForm(vet = {}, tags = {}, editors = {}, formAction)
     form.edit(action=formAction method="POST" enctype="multipart/form-data")
         .form-group
             label(for="name") Name
             input(type="text" name="name" value=vet.name class="form-control" placeholder="Name")
-        - if (formAction !== '/add') {
-        .form-group
-            p Rate
-            .form-check.form-check-inline
-                input.form-check-input(type="radio" name="rate" id="rate_1" value="1")
-                label.form-check-label(for="rate_1") 1
-            .form-check.form-check-inline
-                input.form-check-input(type="radio" name="rate" id="rate_2" value="2")
-                label.form-check-label(for="rate_2") 2
-            .form-check.form-check-inline
-                input.form-check-input(type="radio" name="rate" id="rate_3" value="3")
-                label.form-check-label(for="rate_3") 3
-            .form-check.form-check-inline
-                input.form-check-input(type="radio" name="rate" id="rate_4" value="4")
-                label.form-check-label(for="rate_4") 4
-            .form-check.form-check-inline
-                input.form-check-input(type="radio" name="rate" id="rate_5" value="5")
-                label.form-check-label(for="rate_5") 5
-        - }
         .form-group
             label(for="description") Description
             textarea(type="text" name="description" class="form-control" placeholder="Description")= vet.description
         .form-group
             label(for="address") Address
             input(type="text" id="address" name="location[address]" value=(vet.location && vet.location.address) placeholder="Full address" class="form-control")
-        .form-group.d-none
+        .form-group
             label(for="lng") Address Lng
-            input(type="text" id="lng" name="location[coordinates][0]" value=(vet.location && vet.location.coordinates[0]) class="form-control" placeholder="Longitude" required)
+            input(type="text" id="lng" name="location[coordinates][0]" value=(vet.location && vet.location.coordinates[0]) class="form-control" placeholder="Longitude" required readonly)
             label(for="lng") Address Lat
-            input(type="text" id="lat" name="location[coordinates][1]" value=(vet.location && vet.location.coordinates[1]) class="form-control" placeholder="Latitude" required)
+            input(type="text" id="lat" name="location[coordinates][1]" value=(vet.location && vet.location.coordinates[1]) class="form-control" placeholder="Latitude" required readonly)
         - const vetTags = vet.tags || []
         - const parsedVetTags = vetTags.join(',').split(',')
         .tags
@@ -42,17 +23,38 @@ mixin vetForm(vet = {}, tags = {}, formAction)
                     input(type="checkbox" id=tag._id value=tag._id name="tags" class="form-check-input" checked=(parsedVetTags.includes(tag._id.toString())))
                     label(for=tag._id class="form-check-label") #{tag.name}
         .form-group
-            label(for="vet_logo") Logo
-            input(type="file" class="form-control-file" id="vet_logo" name="vet_logo")
+            .input-group
+                .input-group-prepend
+                    span.input-group-text(for="vet_logo") Logo
+                .custom-file
+                    input(type="file" class="custom-file-input" id="vet_logo" name="vet_logo")
+                    label.custom-file-label Choose file
             if vet.vet_logo 
                 img(src=`/public/uploads/vets_logos/${vet.slug}/${vet.vet_logo}` alt=vet.name width=200)
-        .form-group.gallery
-            label(for="vet_gallery") Gallery
-            input(type="file" class="form-control-file" id="vet_gallery" name="vet_gallery" multiple)
+        .form-group
+            .input-group.gallery
+                .input-group-prepend
+                    span.input-group-text(for="vet_gallery") Gallery
+                .custom-file
+                    input(type="file" class="custom-file-input" id="vet_gallery" name="vet_gallery" multiple)
+                    label.custom-file-label Choose files
             if vet.vet_gallery
                 each image in vet.vet_gallery
                     .gallery-small(id=image)
                         img.image-small(src=`/public/uploads/vets_galleries/${vet.slug}/${image}` alt=vet.name width=200)
                         span.js-removeGalleryImage.trash-small.trash-icon.fas.fa-trash(data-id=image)
-        input.btn.btn-success(type="submit" value=title)
+        .form-group
+            .input-group
+                - const vetEditors = vet.editors || []
+                - const parsedVetEditors = vetEditors.join(',').split(',')
+                .input-group-prepend
+                    label.input-group-text.font-weight-light Assign editor(s)
+                select.custom-select(name='editors' size=5 multiple)
+                    each editor in editors
+                        option.text-uppercase(name=editor._id value=editor._id selected=(parsedVetEditors.includes(editor._id.toString())))= `${editor.first_name} ${editor.last_name}`
+        .submit
+        .button-group
+            input.btn.btn-success(type="submit" value="Edit")
+            input.btn.btn-warning(type="submit" value="Cancel")
+            input.btn.btn-danger.float-right(type="submit" value="Delete")
         

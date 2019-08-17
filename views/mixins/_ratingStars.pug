@@ -1,0 +1,17 @@
+mixin ratingStars(vet = {})
+  p.message.d-none(data-vet=vet._id)= 'You have rated this vet! Thanks! :)'
+  .rate.d-none(data-value=vet.average_rate data-vet=vet._id)
+  .stars.stars-outer(data-vet=vet._id style='margin: 0.3rem auto;')
+    i.star.star-1.far.fa-star(data-value='1')
+    i.star.star-2.far.fa-star(data-value='2')
+    i.star.star-3.far.fa-star(data-value='3')
+    i.star.star-4.far.fa-star(data-value='4')
+    i.star.star-5.far.fa-star(data-value='5')
+    - const percentage = vet.average_rate || 0
+    .stars-inner(data-vet=vet._id style=`width: ${percentage * 20}%`)
+      i.star.star-1.fas.fa-star(data-value='1')
+      i.star.star-2.fas.fa-star(data-value='2')
+      i.star.star-3.fas.fa-star(data-value='3')
+      i.star.star-4.fas.fa-star(data-value='4')
+      i.star.star-5.fas.fa-star(data-value='5')
+  

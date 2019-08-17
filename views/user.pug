@@ -4,4 +4,9 @@ include mixins/_userForm
 
 block content
   h2.title #{title}
+    .form-group
+      button.btn.btn-info.btn-sm(onclick="history.back(-1)")
+        i.fas.fa-arrow-left
+        span  Back
+
     +userForm(user)

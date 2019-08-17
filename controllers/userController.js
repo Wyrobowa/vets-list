@@ -42,6 +42,7 @@ const register = async (req, res, next) => {
     email: req.body.email,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
+    level: req.body.level,
   });
   const registerWithPromisify = promisify(User.register, User);
   await registerWithPromisify(user, req.body.password);
@@ -58,6 +59,10 @@ const updateAccount = async (req, res, next) => {
     last_name: req.body.last_name,
     email: req.body.email,
   };
+
+  if (req.user.level === 'admin') {
+    updates.level = req.body.level;
+  }
 
   const user = await User.findOneAndUpdate(
     { _id: req.user._id },

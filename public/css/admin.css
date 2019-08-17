@@ -1,0 +1,104 @@
+.container-fluid {
+  margin-top: 1rem;
+  min-height: calc(100vh - 9.6rem);
+}
+
+.users-container, .vets-container, .tags-container, .contact-container {
+  position: relative;
+}
+
+.title {
+  position: relative;
+}
+
+form {
+  margin: 1.5rem 0;
+}
+
+img {
+  max-width: 5rem;
+  max-height: 5rem;
+}
+
+.tag {
+  background: #5F9EA0;
+  float: left;
+  margin-right:  0.3rem;
+  padding: 0.3rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #274142;
+}
+.tag.active-tag {
+  background: #b9d4d6;
+}
+
+.action-button {
+  margin: 0 0.3rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.action-button .fa-edit {
+  color: rgb(68, 156, 238);
+}
+.action-button .fa-trash {
+  color: rgb(255, 100, 100);
+}
+
+.submit {
+  margin: 1.5rem 0;
+  border: 0.03rem solid #ced4da;
+}
+
+.flash-messages {
+  animation: slide 2s ease 2.5s forwards;
+  position: fixed;
+  z-index: 9999;
+  top: 50px;
+  right: 50px;
+}
+
+@keyframes slide {
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: hidden;
+  }
+}
+
+.flash {
+  background: white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  padding: 0.4rem;
+  position: relative;
+  border-radius: 3px;
+  display: flex;
+}
+
+.flash .flash__text {
+  flex: 1;
+}
+
+.flash.flash--success {
+  background: linear-gradient(135deg, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%);
+}
+.flash.flash--error {
+  background: linear-gradient(20deg, rgba(255,0,0,1) 0%, rgba(200,0,0,1) 100%);
+}
+.flash.flash--info {
+  background: linear-gradient(35deg, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%);
+}
+.flash p {
+  background: white;
+  margin: 0;
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+footer {
+  height: 3rem;
+}

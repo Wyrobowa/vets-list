@@ -4,6 +4,11 @@ include mixins/_loginForm
 include mixins/_forgotPasswordForm
 
 block content
+    .form-group
+        button.btn.btn-info.btn-sm(onclick="history.back(-1)")
+            i.fas.fa-arrow-left
+            span  Back
+            
     .form-box
         +loginForm()
 

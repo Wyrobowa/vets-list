@@ -6,4 +6,12 @@ mixin userForm(user = {})
       input.form-control(type="text" name="last_name" value=user.last_name placeholder="Last Name")
     .form-group
       input.form-control(type="email" name="email" value=user.email placeholder="Email")
-    button.btn.btn-primary(type="submit")= 'Edit User'
+    if admin
+      .form-group
+        label.font-weight-light User permissions:
+        select.form-control(name="level")
+          each level in user.levels
+            option.text-uppercase(name=level value=level selected=(user.level === level))= level
+    button.btn.btn-primary(type="submit")= 'Edit'
+    button.btn.btn-warning(type="submit")= 'Cancel'
+    button.btn.btn-danger.float-right(type="submit")= 'Delete'

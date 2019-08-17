@@ -6,22 +6,12 @@ header .nav-item {
   margin: 0 10px;
 }
 
-header .auth-buttons {
-  position: absolute;
-  right: 1em;
-}
-
 .container {
   margin-top: 2rem;
   min-height: calc(100vh - 9.6rem);
 }
 
 .flash {
-  /* border: solid 1px red;
-  padding: 0.5em;
-  font-size: 0.8em;
-  font-weight: lighter;
-  margin: 1em 0; */
   background: white;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
   margin-bottom: 2rem;
@@ -113,9 +103,111 @@ header .auth-buttons {
   width: 100%;
 }
 
+.button-group {
+  margin: 1rem 0;
+}
+
+.submit {
+  margin: 1.5rem 0;
+  border: 0.03rem solid #ced4da;
+}
+
+.search {
+  position: relative;
+  display: flex;
+}
+
+.search__results {
+  background: white;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 5;
+  border-radius: 0.3rem;
+  color: #212529;
+}
+
+.search__result {
+  color: #212529;
+  padding: 10px;
+  display: block;
+  border-bottom: 1px solid #ececec;
+}
+
+.search__result--active {
+  color: #212529;
+  background: #f1f1f1;
+}
+
 .trash-icon {
   color: rgb(255, 100, 100);
   cursor: pointer;
+}
+
+.white-spaces {
+  white-space: pre-wrap;
+}
+
+.tag {
+  background: #5F9EA0;
+  float: left;
+  margin-right: 1.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #274142;
+}
+.tag.active-tag {
+  background: #b9d4d6;
+}
+
+/** Star rating */
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: "Font Awesome 5 Free";
+  cursor: pointer;
+  font-size: 1.5rem
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner i::before {
+  color: #1fb986e8;
+}
+
+.stars .fa-star:hover, .stars .fa-star:hover::before {
+  color: #f8ce0b;
+}
+
+.message {
+  font-size: 0.75rem;
+  color: chocolate;
+  margin: auto;
+}
+
+.message.message-clicked {
+  -webkit-animation:scaleme 1s;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes scaleme {
+  0% { -webkit-transform: scale(1); opacity: 1; }
+  100% { -webkit-transform: scale(0.1); opacity: 0; display:none; }
+} 
+
+ul li {
+  list-style-type: none;
 }
 
 footer {

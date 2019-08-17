@@ -1,0 +1,17 @@
+extends layout
+
+include mixins/_tagsList
+include mixins/_vetCard
+
+block content
+    h2.title #{title}
+    +tagsList(tags, activeTag, vets)
+    .clearfix
+    .submit
+    .row
+        each vet in vets
+            .col-6.col-md-4
+                .card.mb-3
+                    +vetCard(vet)
+
+
