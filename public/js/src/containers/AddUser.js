@@ -19,27 +19,40 @@ const AddUser = (props) => {
   useEffect(() => {
     fetch('/api/admin/user/add')
       .then(response => response.json())
-      .then((data) => {
-        setUser(data);
-      })
+      .then(data => {
+        setUser({ levels: data.levels });
+      });
   }, []);
 
   const handleChange = (event) => {
     setUser({
-      [event.target.name]: event.target.value
-    })
+      user: {
+        ...userData.user,
+        [event.target.name]: event.target.value,
+      },
+      levels: userData.levels,
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('/api/admin/user/:_id/edit', { 
+    fetch('/api/admin/user/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userData } )
-     }).then(response => response.json());
+      body: JSON.stringify({ userData })
+     })
+     .then(response => response.json())
+     .then((data) => {
+      if (data.status === 'success') {
+        props.history.push({
+         pathname: '/admin/users',
+         state: data,
+       });
+      }
+     });
   };
 
   return (
@@ -63,9 +76,17 @@ const AddUser = (props) => {
           <label>User permissions</label>
           <select className="form-control" name="level" onChange={handleChange}>
             {(userData.levels) ? userData.levels.map(level => 
-              <option key={level} className="text-uppercase" name={level} >{level}</option>
+              <option key={level} className="text-uppercase" name={level} value={level} onChange={handleChange}>{level}</option>
             ) : ''}
           </select>
+        </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input className="form-control" type="password" name="password" onChange={handleChange} />
+        </div>
+        <div className="form-group">
+          <label>Confirm password</label>
+          <input className="form-control" type="password" name="password_confirmation" onChange={handleChange} />
         </div>
         <Button buttonType="button" type="submit" size="normal" model="success" handleClick={handleSubmit}>
           <Icon type="add" />

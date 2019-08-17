@@ -14,6 +14,32 @@ const Users = (props) => {
       .then(data => setUsers(data));
   }, []);
 
+  const removeUser = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (event.target.nodeName === 'I') {
+      event.target = event.target.parentNode;
+    }
+
+    const { id } = event.target;
+
+    fetch(`/api/admin/user/${id}/delete`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ users } )
+      })
+      .then(response => response.json())
+      .then((data) => {
+        if (data.status === 'success') {
+          const updatedUsers = users.filter(user => user._id !== id)
+          setUsers(updatedUsers);
+        }
+      });
+  }
+
   return (
     <div className="users">
       {props.location.state
@@ -41,7 +67,14 @@ const Users = (props) => {
               <td>{user.last_name}</td>
               <td>{user.first_name}</td>
               <td>{user.email}</td>
-              <td></td>
+              <td>
+                <Button buttonType="link" model="info" link={`user/${user._id}/edit`}>
+                  <Icon type="edit" />
+                </Button>
+                <Button buttonType="button" type="button" size="small" model="danger" handleClick={removeUser} id={user._id}>
+                  <Icon type="delete" />
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
