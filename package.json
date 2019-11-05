@@ -36,7 +36,7 @@
     "lodash": "^4.17.15",
     "md5": "^2.2.1",
     "mongo-sanitize": "^1.0.1",
-    "mongoose": "^5.4.20",
+    "mongoose": "^5.7.5",
     "mongoose-enumvalues": "0.0.3",
     "mongoose-mongodb-errors": "0.0.2",
     "morgan": "^1.9.1",
