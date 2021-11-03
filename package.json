@@ -55,7 +55,7 @@
     "star-ratings": "^1.0.0",
     "terser-webpack-plugin": "^1.4.1",
     "uuid": "^3.3.2",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
